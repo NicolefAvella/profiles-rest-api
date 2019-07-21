@@ -4,7 +4,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 
 
-class UserProfileManager():
+class UserProfileManager(BaseUserManager):
     ''' administrador de perfiles de usuario '''
     def create_user(self, email, name, password=None):
         if not email:
@@ -34,8 +34,8 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
-    is_coordinator = models.BooleanField(default=False) #es coordinador area
-    process = models.CharField(max_length=100) #proceso dentro de la empresa al que pertenece
+    is_staff = models.BooleanField(default=False)
+
 
     objects = UserProfileManager()
 
